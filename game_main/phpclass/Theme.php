@@ -29,7 +29,9 @@ class Theme extends Base
         }
         // デバッグ情報
         $this->debug_log("$json_file", $json_buf);
+        $this->debug_log("basename", basename($json_file));
         // テーマを設定
+        setlocale(LC_ALL, 'ja_JP.UTF-8');
         $this->theme = basename($json_file, ".json");
         // 答えを設定
         foreach ($json_buf as $value) {
