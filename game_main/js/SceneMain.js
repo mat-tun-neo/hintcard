@@ -10,7 +10,7 @@ phina.define("SceneMain", {
     // 親クラス初期化
     this.superInit();
     // セッションID
-    this.sessionId = String(document.cookie).replace("PHPSESSID=", "");
+    this.sessionId = String(document.cookie.match(/PHPSESSID=[A-Za-z0-9]{32}/i)).replace("PHPSESSID=", "");
     // 背景スプライト
     //this.mainwindow = Sprite("mainwindow").addChildTo(this);
     //this.mainwindow.setPosition(this.gridX.center(), this.gridY.center());
