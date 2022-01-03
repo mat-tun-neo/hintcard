@@ -98,6 +98,11 @@ function zeroPadding(NUM, LEN) {
 	return ( Array(LEN).join("0") + NUM ).slice( -LEN );
 };
 
+// 文字列挿入
+function strIns(str, idx, val) {
+  return str.slice(0, idx) + val + str.slice(idx);
+}
+
 /*
  * メイン処理
  */

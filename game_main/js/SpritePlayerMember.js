@@ -25,8 +25,14 @@ phina.define("SpritePlayerMember", {
   // ヒントラベル追加
   addHintLabel: function(str="", color="white") {
     let fontsize = HINT_FONT_SIZE
-    if (str.length > 3) {
-      fontsize = HINT_FONT_SIZE * 3 / str.length
+    // フォントサイズと改行の調整
+    if (str.length > 8) {
+      fontsize = HINT_FONT_SIZE * 3.5 / 8;
+      for (i = 0; i < Math.floor(str.length / 10); i++) {
+        str = strIns(str, (i + 1) * 10, "\n");
+      }
+    } else if (str.length > 3) {
+      fontsize = HINT_FONT_SIZE * 3.5 / str.length
     }
     this.hintLabel = Label({
       text: str,

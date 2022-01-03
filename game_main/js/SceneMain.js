@@ -24,11 +24,10 @@ phina.define("SceneMain", {
     // スプライトグループ
     this.memberPlayers = DisplayElement().addChildTo(this);
     this.memberYesnoButtons = DisplayElement().addChildTo(this);
-    //this.myYesnoButtons = [];
     this.myYesnoButtons = DisplayElement().addChildTo(this);
     // 同部屋プレイヤー情報の描画
     this.updatePlayerInfo();
-},
+  },
   // 画面更新
   update: function(app) {
     // プレイヤー更新
@@ -59,7 +58,6 @@ phina.define("SceneMain", {
     }
     this.title = Label({text: "テーマ： " + theme}).addChildTo(this);
     this.title.setPosition(SCREEN_WIDTH / 2, LABEL_FONT_SIZE);
-    this.title.fill = "black";
     this.title.fontSize = LABEL_FONT_SIZE;
     this.title.fill = "white";
     this.title.stroke = "black";
@@ -218,7 +216,6 @@ phina.define("SceneMain", {
       this.sankasyaBosyu.addNameLabel("参加者を待っています", "white");
       this.sankasyaBosyu.moveFront();
     }
-
   },
   // スタート後のスプライト描画
   drawWhilePlaying: function(response) {
