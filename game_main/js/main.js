@@ -25,7 +25,7 @@ const START_X = SCREEN_WIDTH / 4;
 const START_Y = TITLE_HEIGHT;
 
 // URL
-const HREF = "http://192.168.11.21:8080";
+const HREF = document.getElementById("HTTP_REFERER").innerText;
 
 const date = new Date();
 const Y = date.getFullYear();

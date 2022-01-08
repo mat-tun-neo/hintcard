@@ -17,6 +17,7 @@
   $room = new Room($_POST);
   $room->createRoomInfo();
 ?>
+<div id="HTTP_REFERER" style="display:none"><?php echo $_SERVER['HTTP_REFERER'] ?></div>
 
 <script src="./js/phina.min.js"></script>
 <script src="./js/axios.min.js"></script>
