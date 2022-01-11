@@ -19,6 +19,7 @@ phina.define("SceneMain", {
     // ボタン描画
     this.putXButton();
     // スプライト
+    this.player;
     this.sankasyaBosyu;
     this.startButton;
     // スプライトグループ
@@ -122,13 +123,15 @@ phina.define("SceneMain", {
         // テーマ描画
         this.putTitle(response.data[this.sessionId].theme);
         // 自プレイヤーのヒントカード描画
-        let player = SpritePlayer(
-          "000",
-          SCREEN_WIDTH / 2 - YESNO_BUTTON_WIDTH / 2 * 3 - PADDING*2,
-          SCREEN_HEIGHT - HINTCARD_ME_HEIGHT
-        ).addChildTo(this);
-        player.addNameLabel(order[player_no] + "番　" + response.data[this.sessionId].name, "white");
-        console.log("this.sessionId.gamestart_flg：" + response.data[this.sessionId].gamestart_flg);
+        if (this.player == null) {
+          this.player = SpritePlayer(
+            "000",
+            SCREEN_WIDTH / 2 - YESNO_BUTTON_WIDTH / 2 * 3 - PADDING*2,
+            SCREEN_HEIGHT - HINTCARD_ME_HEIGHT
+          ).addChildTo(this);
+          this.player.addNameLabel(order[player_no] + "番　" + response.data[this.sessionId].name, "white");
+          console.log("this.sessionId.gamestart_flg：" + response.data[this.sessionId].gamestart_flg);
+        }
 
         // スタートボタン押下前
         if (response.data[this.sessionId].gamestart_flg == 0) {
