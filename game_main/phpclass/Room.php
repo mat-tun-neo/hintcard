@@ -157,7 +157,7 @@ class Room extends Base
         $this->debug_log("$json_file", $json_buf);
     }
 
-    // 部屋情報取得
+    // ボタン押下処理
     public function pushButton()
     {
         $this->methodname = __FUNCTION__;

@@ -46,7 +46,7 @@ phina.define("SceneMain", {
     //console.log(this.xbutton.x + "/" + this.xbutton.y);
     // Xボタン押下時の処理
     this.xbutton.setInteractive(true);
-    this.xbutton.onclick = function() {
+    this.xbutton.onpointstart = function() {
       this.exit("Exit");
     }.bind(this);
   },
@@ -144,8 +144,8 @@ phina.define("SceneMain", {
             ).addChildTo(this);
             // スタートボタン押下時の処理
             this.startButton.sprite.setInteractive(true);
-            this.startButton.sprite.onclick = function() {
-              console.log("startButton.onclick");
+            this.startButton.sprite.onpointstart = function() {
+              console.log("startButton.onpointstart");
               axios.post("./apiStartGame.php")
               .then(function (response) {
 
@@ -170,13 +170,13 @@ phina.define("SceneMain", {
               ).addChildTo(this.myYesnoButtons);
               // YES・NO・DONTKNOWボタン押下時の処理
               myYesnoButton.sprite.setInteractive(true);
-              myYesnoButton.sprite.onclick = function() {
+              myYesnoButton.sprite.onpointstart = function() {
                 // スプライト拡大
                 myYesnoButton.scaleSprite(YESNO_BUTTON_SCALE);
                 myYesnoButton.timestamp = Date.now();
                 // ボタン押下時間を更新
                 let post_data= {"mybutton_no": mybutton_no[i]};
-                console.log("yesnoButton.onclick", post_data);
+                console.log("yesnoButton.onpointstart", post_data);
                 axios.post("./apiPushButton.php", post_data)
                 .then(function (response) {
 
