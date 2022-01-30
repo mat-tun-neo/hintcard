@@ -16,7 +16,7 @@ class Base
     // デバッグログ出力
     protected function debug_log($key, $value)
     {
-        error_log($this->classname."：".$this->methodname."：".$key."：".print_r($value, true).PHP_EOL, 3, $this->log);
+        error_log(date('Y-m-d H:i:s').":".session_id().":".$this->classname."：".$this->methodname."：".$key."：".print_r($value, true).PHP_EOL, 3, $this->log);
     }
 }
 ?>

@@ -28,7 +28,7 @@ class Room extends Base
             $this->post_ary['roomno'] = $this->ip_address;
         }
         // デバッグ情報
-        $this->debug_log("ip_address", $this->ip_address);
+        //$this->debug_log("ip_address", $this->ip_address);
         //$this->debug_log("unix_time", $this->unix_time);
     }
 
