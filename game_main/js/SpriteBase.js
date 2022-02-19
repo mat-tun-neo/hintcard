@@ -3,7 +3,7 @@ phina.define("SpriteBase", {
 
   // コンストラクタ
   init: function(mode, pattern, x, y, width=CHAR_XSIZE, height=CHAR_YSIZE) {
-    console.log("SpriteBaseクラスinit");
+    //console.log("SpriteBaseクラスinit");
     this.superInit();
     // スプライトグループ
     this.myspritegroup = DisplayElement().addChildTo(this);
@@ -62,7 +62,7 @@ phina.define("SpriteBase", {
   },
   // プレイヤースプライトを最前面へ
   moveFront: function() {
-    console.log("SpriteBaseクラスmoveFront");
+    //console.log("SpriteBaseクラスmoveFront");
     this.myspritegroup.removeChild(this.sprite);
     this.sprite.addChildTo(this.myspritegroup);
   },

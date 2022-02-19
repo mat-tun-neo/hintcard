@@ -11,6 +11,8 @@ class Room extends Base
     private $unix_time;
     // IPアドレス
     private $ip_address;
+    // 部屋情報JSONをクリア対象とするミリ秒数
+    const BUTTON_APPEAR_TIME = 2.5 * 1000;
 
     // コンストラクタ
     public function __construct($post_ary)
@@ -72,6 +74,7 @@ class Room extends Base
         $json_buf[session_id()]["answer"] = "開始待ち";
         for ($i = 0; $i < 3; $i++) {
             $json_buf[session_id()]["mybutton"][$i] = 0;
+            $json_buf[session_id()]["mybutton_flg"][$i] = 0;
         }
         // デバッグ情報
         $this->debug_log("$json_file", $json_buf);
@@ -97,6 +100,14 @@ class Room extends Base
         $json_buf = array();
         if (file_exists($json_file) && filesize($json_file) > 0) {
             $json_buf = json_decode(file_get_contents($json_file), true);
+        }
+        foreach ($json_buf as $key => $value) {
+            for ($i = 0; $i < 3; $i++) {
+                $json_buf[$key]["mybutton_flg"][$i] = 0;
+                if ($json_buf[$key]["mybutton"][$i] > 0 && $this->unix_time - $json_buf[$key]["mybutton"][$i] < self::BUTTON_APPEAR_TIME) {
+                    $json_buf[$key]["mybutton_flg"][$i] = 1;
+                }
+            }
         }
         // デバッグ情報
         //$this->debug_log("$json_file", $json_buf);

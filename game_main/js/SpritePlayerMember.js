@@ -3,7 +3,7 @@ phina.define("SpritePlayerMember", {
 
   // コンストラクタ
   init: function(pattern, x, y, width= HINTCARD_MEMBER_WIDTH, height= HINTCARD_MEMBER_HEIGHT - LABEL_FONT_SIZE) {
-    console.log("SpritePlayerMemberクラスinit");
+    //console.log("SpritePlayerMemberクラスinit");
     this.superInit("hintcard_member", pattern, x, y, width, height);
     // 初期位置
     this.changeLocation();

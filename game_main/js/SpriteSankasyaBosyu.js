@@ -3,7 +3,7 @@ phina.define("SpriteSankasyaBosyu", {
 
   // コンストラクタ
   init: function(pattern, x, y, width= SCREEN_WIDTH, height= SCREEN_HEIGHT/10) {
-    console.log("SpriteSankasyaBosyuクラスinit");
+    //console.log("SpriteSankasyaBosyuクラスinit");
     this.superInit("sankasya_bosyu", pattern, x, y, width, height);
     // 初期位置
     this.changeLocation();

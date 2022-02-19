@@ -6,7 +6,7 @@ phina.define("SceneMain", {
   superClass: "DisplayScene",
   // コンストラクタ
   init: function(param) {
-    console.log("SceneMainクラスinit");
+    //console.log("SceneMainクラスinit");
     // 親クラス初期化
     this.superInit();
     // セッションID
@@ -33,14 +33,14 @@ phina.define("SceneMain", {
   update: function(app) {
     // プレイヤー更新
     if (app.frame % UPDATE_FRAME == 0) {
-      console.log("update_frame：" + app.frame);
+      //console.log("update_frame：" + app.frame);
       // 同部屋プレイヤー情報の描画
       this.updatePlayerInfo();
     };
   },
   // Xボタン描画
   putXButton: function() {
-    console.log("SceneMainクラスputXButton");
+    //console.log("SceneMainクラスputXButton");
     this.xbutton = Sprite("xbutton").addChildTo(this);
     this.xbutton.setPosition(SCREEN_WIDTH - BUTTON_SIZE / 2, BUTTON_SIZE / 2);
     //console.log(this.xbutton.x + "/" + this.xbutton.y);
@@ -52,7 +52,7 @@ phina.define("SceneMain", {
   },
   // タイトル描画
   putTitle: function(theme) {
-    console.log("SceneMainクラスputTitle");
+    //console.log("SceneMainクラスputTitle");
     // タイトルラベル
     if (this.title != null) {
       this.title.remove();
@@ -66,7 +66,7 @@ phina.define("SceneMain", {
   },
   // 同部屋プレイヤー情報の更新
   updatePlayerInfo: function() {
-    console.log("SceneMainクラスupdatePlayerInfo");
+    //console.log("SceneMainクラスupdatePlayerInfo");
     axios.post("./apiGetData.php")
     .then(function (response) {
       this.erasePlayers(response);
@@ -77,18 +77,18 @@ phina.define("SceneMain", {
   },
   // プレイヤーオブジェクト描画
   drawPlayers: function(response) {
-    console.log("SceneMainクラスdrawPlayers");
-    console.log("getData - responseログ：");
-    console.log(response);
+    //console.log("SceneMainクラスdrawPlayers");
+    //console.log("getData - responseログ：");
+    //console.log(response);
 
     let keys = Object.keys(response.data);
-    console.log("keys.length：" + keys.length);
-    console.log("this.sessionId：" + this.sessionId);
+    //console.log("keys.length：" + keys.length);
+    //console.log("this.sessionId：" + this.sessionId);
 
     let member_no = 0;
     let sessionExist = false;
     for (let player_no = 0; player_no < keys.length; player_no++) {
-      console.log("keys[" + player_no + "]：" + keys[player_no]);
+      //console.log("keys[" + player_no + "]：" + keys[player_no]);
       // 参加メンバの描画
       let order = ["①", "②", "③", "④", "⑤"];
       if (this.sessionId != keys[player_no]) {
@@ -105,8 +105,9 @@ phina.define("SceneMain", {
         memberPlayer.addHintLabel(response.data[keys[player_no]].answer, "white");
         // 参加メンバのYES・NO・DONTKNOWボタン描画
         for (let mybutton_no = 0; mybutton_no < 3; mybutton_no++) {
-          console.log("Date.now() - response.data[keys[player_no]].mybutton[mybutton_no]", Date.now() - response.data[keys[player_no]].mybutton[mybutton_no]);
-          if (response.data[keys[player_no]].mybutton[mybutton_no] > 0 && Date.now() - response.data[keys[player_no]].mybutton[mybutton_no] < YESNO_BUTTON_MILISEC) {
+          //console.log("Date.now() - response.data[keys[player_no]].mybutton[mybutton_no]", Date.now() - response.data[keys[player_no]].mybutton[mybutton_no]);
+          //if (response.data[keys[player_no]].mybutton[mybutton_no] > 0 && Date.now() - response.data[keys[player_no]].mybutton[mybutton_no] < YESNO_BUTTON_MILISEC) {
+          if (response.data[keys[player_no]].mybutton_flg[mybutton_no] == 1) {
             SpriteButtonYesno(
               zeroPadding(mybutton_no, 3),
               base_pos_x + YESNO_BUTTON_WIDTH * (mybutton_no - 1),
@@ -130,7 +131,7 @@ phina.define("SceneMain", {
             SCREEN_HEIGHT - HINTCARD_ME_HEIGHT
           ).addChildTo(this);
           this.player.addNameLabel(order[player_no] + "番　" + response.data[this.sessionId].name, "white");
-          console.log("this.sessionId.gamestart_flg：" + response.data[this.sessionId].gamestart_flg);
+          //console.log("this.sessionId.gamestart_flg：" + response.data[this.sessionId].gamestart_flg);
         }
 
         // スタートボタン押下前
@@ -198,21 +199,22 @@ phina.define("SceneMain", {
   },
   // プレイヤーオブジェクト消去
   erasePlayers: function(response) {
-    console.log("SceneMainクラスerasePlayers");
+    //console.log("SceneMainクラスerasePlayers");
     // 参加メンバのヒントカード消去
     //console.log("this.memberPlayers.children.length", this.memberPlayers.children.length);
     this.memberPlayers.children.length = 0;
     // 参加メンバのYES・NO・DONTKNOWボタン消去
+    this.memberYesnoButtons.children.length = 0;
     //console.log("this.memberYesnoButtons.children.length", this.memberYesnoButtons.children.length);
-    for (let i = this.memberYesnoButtons.children.length - 1; i >= 0 ; i--){
-      if (Date.now() - this.memberYesnoButtons.children[i].timestamp > YESNO_BUTTON_MILISEC) {
-        this.memberYesnoButtons.children.splice(i, 1);
-      }
-    }
+    // for (let i = this.memberYesnoButtons.children.length - 1; i >= 0 ; i--){
+    //   if (Date.now() - this.memberYesnoButtons.children[i].timestamp > YESNO_BUTTON_MILISEC) {
+    //     this.memberYesnoButtons.children.splice(i, 1);
+    //   }
+    // }
   },
   // スタート前のスプライト描画
   drawWhileLookingFor: function(response) {
-    console.log("SceneMainクラスdrawWhileLookingFor");
+    //console.log("SceneMainクラスdrawWhileLookingFor");
     // 参加者募集中
     if (this.sankasyaBosyu == null) {
       this.sankasyaBosyu = SpriteSankasyaBosyu("000", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2).addChildTo(this);
@@ -222,7 +224,7 @@ phina.define("SceneMain", {
   },
   // スタート後のスプライト描画
   drawWhilePlaying: function(response) {
-    console.log("SceneMainクラスdrawWhilePlaying");
+    //console.log("SceneMainクラスdrawWhilePlaying");
     // スプライト消去
     if (this.sankasyaBosyu != null) { this.sankasyaBosyu.removeSprite(); }
     if (this.startButton != null) { this.startButton.removeSprite(); }

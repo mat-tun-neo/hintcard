@@ -3,7 +3,7 @@ phina.define("SpritePlayer", {
 
   // コンストラクタ
   init: function(pattern, x, y, width= HINTCARD_ME_WIDTH, height= HINTCARD_ME_HEIGHT) {
-    console.log("SpritePlayerクラスinit");
+    //console.log("SpritePlayerクラスinit");
     this.superInit("hintcard_me", pattern, x, y, width, height);
     // 初期位置
     this.changeLocation();
